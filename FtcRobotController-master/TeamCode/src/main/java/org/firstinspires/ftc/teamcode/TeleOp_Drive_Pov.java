@@ -33,8 +33,8 @@ import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.util.Range;
-
-import org.firstinspires.ftc.robotcontroller.external.samples.HardwarePushbot;
+import org.firstinspires.ftc.teamcode.HardwarePushbot;
+import static org.firstinspires.ftc.teamcode.HardwarePushbot.armServo;
 
 /**
  * This OpMode uses the common Pushbot hardware class to define the devices on the robot.
@@ -60,6 +60,7 @@ public class TeleOp_Drive_Pov extends LinearOpMode {
 
     @Override
     public void runOpMode() {
+        //creating variables
         double left;
         double right;
         double drive;
@@ -81,11 +82,14 @@ public class TeleOp_Drive_Pov extends LinearOpMode {
         // run until the end of the match (driver presses STOP)
         while (opModeIsActive()) {
 
-            // Run wheels in POV mode (note: The joystick goes negative when pushed forwards, so negate it)
-            // In this mode the Left stick moves the robot fwd and back, the Right stick turns left and right.
-            // This way it's also easy to just drive straight, or just turn.
+            /*Run wheels in POV mode (note: The joystick goes negative when pushed forwards, so negate it)
+            * In this mode the Left stick moves the robot fwd and back, the Right stick turns left and right.
+            * This way it's also easy to just drive straight, or just turn.
+            */
+
+            //Left stick y axis moves it forward and back, x axis moves it left and right. If driving isn't preferred, change the second line to 'gamepad1.right_stick_x;'
             drive = -gamepad1.left_stick_y;
-            turn  =  gamepad1.right_stick_x;
+            turn  =  gamepad1.left_stick_x;
 
             // Combine drive and turn for blended motion.
             left  = drive + turn;
@@ -106,24 +110,32 @@ public class TeleOp_Drive_Pov extends LinearOpMode {
             robot.frontRight.setPower(right);
 
 
-            // Use gamepad left & right Bumpers to open and close the claw
-            if (gamepad1.right_bumper)
-                clawOffset += CLAW_SPEED;
-            else if (gamepad1.left_bumper)
-                clawOffset -= CLAW_SPEED;
+            /* Makes the arm move up and down according to the toggles on the second gamepad
+            *  Uses servos armServo and armServo2 (preferably working in sync but we'll see. armServo2 can be free moving if worst comes to worst)
+            */
+            //TBA
 
-            // Move both servos to new position.  Assume servos are mirror image of each other.
-        //    clawOffset = Range.clip(clawOffset, -0.5, 0.5);
-          //  robot.leftClaw.setPosition(robot.MID_SERVO + clawOffset);
-            //robot.rightClaw.setPosition(robot.MID_SERVO - clawOffset);
 
-            // Use gamepad buttons to move arm up (Y) and down (A)
-//            if (gamepad1.y)
-  //              robot.leftArm.setPower(robot.ARM_UP_POWER);
-    //        else if (gamepad1.a)
-      //          robot.leftArm.setPower(robot.ARM_DOWN_POWER);
-        //    else
-          //      robot.leftArm.setPower(0.0);
+            /* Makes the claw open and close according to the x and y buttons on the second gamepad
+            * x = open, y=close
+            *  Uses servo clawServo
+            */
+            //TBA
+
+
+            /* Makes the motor move to pull back the string and release it according to the a and b buttons on the second gamepad
+            *  a = tighten, b = release
+            * Uses motor release
+             */
+            //TBA
+
+
+            /* Makes the servo fall to hold the elastic and rise to shoot according to Lb and Rb on the second gamepad
+            *  Lb = hold,  Rb = shoot
+            *  Uses servo triggerServo (to be defined)
+             */
+            //TBA
+
 
             // Send telemetry message to signify robot running;
             telemetry.addData("claw",  "Offset = %.2f", clawOffset);
