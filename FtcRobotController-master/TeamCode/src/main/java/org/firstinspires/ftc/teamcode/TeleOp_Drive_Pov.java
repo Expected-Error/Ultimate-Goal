@@ -32,6 +32,7 @@ package org.firstinspires.ftc.teamcode;
 import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
+import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.util.Range;
 import org.firstinspires.ftc.teamcode.HardwarePushbot;
 import static org.firstinspires.ftc.teamcode.HardwarePushbot.armServo;
@@ -114,20 +115,40 @@ public class TeleOp_Drive_Pov extends LinearOpMode {
             *  Uses servos armServo and armServo2 (preferably working in sync but we'll see. armServo2 can be free moving if worst comes to worst)
             */
             //TBA
+            //Motor not in place
 
 
             /* Makes the claw open and close according to the x and y buttons on the second gamepad
             * x = open, y=close
             *  Uses servo clawServo
             */
-            //TBA
+            //TBT
+            //Change the angles if it goes too far or messes something up
+            if (gamepad2.x)
+                robot.clawServo.setPosition(1);
+            else if (gamepad2.y)
+                robot.clawServo.setPosition(0);
+
 
 
             /* Makes the motor move to pull back the string and release it according to the a and b buttons on the second gamepad
             *  a = tighten, b = release
             * Uses motor release
              */
-            //TBA
+            //TBT
+            //swap forward and reverse is a doesn't tighten and b doesn't release
+            while (gamepad2.a) {
+                robot.release.setDirection(DcMotor.Direction.FORWARD);
+                robot.release.setPower(0.45);
+            }
+            while (gamepad2.b) {
+                robot.release.setDirection(DcMotor.Direction.REVERSE);
+                robot.release.setPower(0.45);
+            }
+
+
+
+
 
 
             /* Makes the servo fall to hold the elastic and rise to shoot according to Lb and Rb on the second gamepad
@@ -135,6 +156,7 @@ public class TeleOp_Drive_Pov extends LinearOpMode {
             *  Uses servo triggerServo (to be defined)
              */
             //TBA
+            //Servo not in place
 
 
             // Send telemetry message to signify robot running;

@@ -117,6 +117,8 @@ public class HardwarePushbot
        armServo.setPosition(MID_SERVO);
        armServo2.setDirection(Servo.Direction.FORWARD);
        armServo2.setPosition(MID_SERVO);
+       clawServo.setPosition(0);
+       clawServo.setDirection(Servo.Direction.FORWARD);
 
 
         // Set all motors to run without encoders.
