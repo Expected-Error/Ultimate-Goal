@@ -62,6 +62,7 @@ public class HardwarePushbot
     public static DcMotor  frontRight   = null;
     public static DcMotor  backRight    = null;
     public static DcMotor  release      = null;
+    public static DcMotor  armMotor     = null;
     public static Servo    armServo     = null;
     public static Servo    armServo2    = null;
     public static Servo    clawServo    = null;
@@ -91,6 +92,7 @@ public class HardwarePushbot
         frontRight   = hwMap.get(DcMotor.class, "front_right");
         backRight    = hwMap.get(DcMotor.class, "back_right");
         release      = hwMap.get(DcMotor.class, "release");
+        armMotor     = hwMap.get(DcMotor.class, "arm_motor");
         //Define and Initialize Servos
         armServo     = hwMap.get(Servo.class,   "arm_servo");
         armServo2    = hwMap.get(Servo.class,   "arm_servo2");
@@ -103,6 +105,7 @@ public class HardwarePushbot
         frontRight.setDirection(DcMotor.Direction.FORWARD);// Set to FORWARD if using AndyMark motors
         backRight.setDirection(DcMotor.Direction.FORWARD);// Set to FORWARD if using AndyMark motors
         release.setDirection(DcMotor.Direction.FORWARD);// Set to FORWARD if using AndyMark motors
+        armMotor.setDirection(DcMotor.Direction.FORWARD);
 
 
         // Set all motors to zero power
@@ -111,6 +114,7 @@ public class HardwarePushbot
         frontLeft.setPower(0);
         backLeft.setPower(0);
         release.setPower(0);
+        armMotor.setPower(0);
 
         //set servo direction and position
        armServo.setDirection(Servo.Direction.FORWARD);
@@ -127,6 +131,7 @@ public class HardwarePushbot
         frontRight.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
         backRight.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
         release.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+        armMotor.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
 
 
 

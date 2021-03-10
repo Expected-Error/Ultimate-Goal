@@ -67,6 +67,7 @@ public class TeleOp_Drive_Pov extends LinearOpMode {
         double drive;
         double turn;
         double max;
+        double arm;
 
         /* Initialize the hardware variables.
          * The init() method of the hardware class does all the work here
@@ -87,6 +88,7 @@ public class TeleOp_Drive_Pov extends LinearOpMode {
             * In this mode the Left stick moves the robot fwd and back, the Right stick turns left and right.
             * This way it's also easy to just drive straight, or just turn.
             */
+            //COMPLETED AND WORKING
 
             //Left stick y axis moves it forward and back, x axis moves it left and right. If driving isn't preferred, change the second line to 'gamepad1.right_stick_x;'
             drive = -gamepad1.left_stick_y;
@@ -115,48 +117,46 @@ public class TeleOp_Drive_Pov extends LinearOpMode {
             *  Uses servos armServo and armServo2 (preferably working in sync but we'll see. armServo2 can be free moving if worst comes to worst)
             */
             //TBA
-            //Motor not in place
+            arm = gamepad1.left_stick_y;
+            robot.armMotor.setPower(arm);
 
 
-            /* Makes the claw open and close according to the x and y buttons on the second gamepad
-            * x = open, y=close
+
+            /* claw opens and closes
+            *  left toggle button = close, x = open
             *  Uses servo clawServo
             */
-            //TBT
-            //Change the angles if it goes too far or messes something up
-            if (gamepad2.x)
-                robot.clawServo.setPosition(1);
-            else if (gamepad2.y)
-                robot.clawServo.setPosition(0);
+            //TBA
+
+
+
+            /* Makes the trigger open and close according to the x and y buttons on the second gamepad
+            * a = latch, b = release
+            *  Uses servo triggerServo
+            */
+            //TBA
 
 
 
             /* Makes the motor move to pull back the string and release it according to the a and b buttons on the second gamepad
-            *  a = tighten, b = release
-            * Uses motor release
+            *  they will continue to tighten until you tell them to stop
+            *  D-UP = tighten, D-DOWN = release, y=stop
+            *  Uses motor release
              */
-            //TBT
-            //swap forward and reverse is a doesn't tighten and b doesn't release
-            while (gamepad2.a) {
-                robot.release.setDirection(DcMotor.Direction.FORWARD);
-                robot.release.setPower(0.45);
-            }
-            while (gamepad2.b) {
+            //COMPLETED AND WORKING
+            while (gamepad2.dpad_up) {
                 robot.release.setDirection(DcMotor.Direction.REVERSE);
                 robot.release.setPower(0.45);
             }
+            while (gamepad2.dpad_down) {
+                robot.release.setDirection(DcMotor.Direction.FORWARD);
+                robot.release.setPower(0.45);
+            }
+            while (gamepad2.y){
+                robot.release.setPower(0);
+            }
 
 
-
-
-
-
-            /* Makes the servo fall to hold the elastic and rise to shoot according to Lb and Rb on the second gamepad
-            *  Lb = hold,  Rb = shoot
-            *  Uses servo triggerServo (to be defined)
-             */
-            //TBA
-            //Servo not in place
 
 
             // Send telemetry message to signify robot running;
