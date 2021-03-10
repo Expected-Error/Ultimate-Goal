@@ -63,15 +63,11 @@ public class HardwarePushbot
     public static DcMotor  backRight    = null;
     public static DcMotor  release      = null;
     public static DcMotor  armMotor     = null;
-    public static Servo    armServo     = null;
-    public static Servo    armServo2    = null;
+
     public static Servo    clawServo    = null;
     public static Servo    triggerServo = null;
 
-//    public static final double MID_SERVO       =  0.5 ;
- //   public static final double ARM_UP_POWER    =  0.45 ;
-   // public static final double ARM_DOWN_POWER  = -0.45 ;
-
+    public static final double MID_SERVO       =  0.5 ;
     /* local OpMode members. */
     HardwareMap hwMap           =  null;
     private ElapsedTime period  = new ElapsedTime();
@@ -94,10 +90,8 @@ public class HardwarePushbot
         release      = hwMap.get(DcMotor.class, "release");
         armMotor     = hwMap.get(DcMotor.class, "arm_motor");
         //Define and Initialize Servos
-        armServo     = hwMap.get(Servo.class,   "arm_servo");
-        armServo2    = hwMap.get(Servo.class,   "arm_servo2");
         clawServo    = hwMap.get(Servo.class,   "claw_servo");
-        triggerServo = hwMap.get(Servo.class,    "triggerServo");
+        triggerServo = hwMap.get(Servo.class,    "trigger_servo");
 
         //set direction of motors
         frontLeft.setDirection(DcMotor.Direction.REVERSE); // Set to REVERSE if using AndyMark motors
@@ -116,14 +110,6 @@ public class HardwarePushbot
         release.setPower(0);
         armMotor.setPower(0);
 
-        //set servo direction and position
-       armServo.setDirection(Servo.Direction.FORWARD);
-       armServo.setPosition(MID_SERVO);
-       armServo2.setDirection(Servo.Direction.FORWARD);
-       armServo2.setPosition(MID_SERVO);
-       clawServo.setPosition(0);
-       clawServo.setDirection(Servo.Direction.FORWARD);
-
 
         // Set all motors to run without encoders.
         frontLeft.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
@@ -134,7 +120,10 @@ public class HardwarePushbot
         armMotor.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
 
 
-
+        clawServo  = hwMap.get(Servo.class, "claw_servo");
+        triggerServo = hwMap.get(Servo.class, "trigger_servo");
+        clawServo.setPosition(MID_SERVO);
+        triggerServo.setPosition(MID_SERVO);
     }
  }
 

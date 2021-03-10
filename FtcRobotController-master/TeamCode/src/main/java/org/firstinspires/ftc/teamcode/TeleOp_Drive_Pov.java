@@ -35,7 +35,6 @@ import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.util.Range;
 import org.firstinspires.ftc.teamcode.HardwarePushbot;
-import static org.firstinspires.ftc.teamcode.HardwarePushbot.armServo;
 
 /**
  * This OpMode uses the common Pushbot hardware class to define the devices on the robot.
@@ -57,7 +56,8 @@ public class TeleOp_Drive_Pov extends LinearOpMode {
     /* Declare OpMode members. */
     HardwarePushbot robot           = new HardwarePushbot();   // Use a Pushbot's hardware
     double          clawOffset      = 0;                       // Servo mid position
-    final double    CLAW_SPEED      = 0.02 ;                   // sets rate to move servo
+    double          clawOffset2      = 0;                       // Servo mid position
+    final double    CLAW_SPEED      = 0.1 ;                   // sets rate to move servo
 
     @Override
     public void runOpMode() {
@@ -68,6 +68,7 @@ public class TeleOp_Drive_Pov extends LinearOpMode {
         double turn;
         double max;
         double arm;
+        double tight;
 
         /* Initialize the hardware variables.
          * The init() method of the hardware class does all the work here
@@ -116,25 +117,10 @@ public class TeleOp_Drive_Pov extends LinearOpMode {
             /* Makes the arm move up and down according to the toggles on the second gamepad
             *  Uses servos armServo and armServo2 (preferably working in sync but we'll see. armServo2 can be free moving if worst comes to worst)
             */
-            //TBA
-            arm = gamepad1.left_stick_y;
-            robot.armMotor.setPower(arm);
+            //COMPLETED AND WORKING
+            arm = -gamepad2.left_stick_y;
+            robot.armMotor.setPower(arm/2);
 
-
-
-            /* claw opens and closes
-            *  left toggle button = close, x = open
-            *  Uses servo clawServo
-            */
-            //TBA
-
-
-
-            /* Makes the trigger open and close according to the x and y buttons on the second gamepad
-            * a = latch, b = release
-            *  Uses servo triggerServo
-            */
-            //TBA
 
 
 
@@ -144,17 +130,37 @@ public class TeleOp_Drive_Pov extends LinearOpMode {
             *  Uses motor release
              */
             //COMPLETED AND WORKING
-            while (gamepad2.dpad_up) {
-                robot.release.setDirection(DcMotor.Direction.REVERSE);
-                robot.release.setPower(0.45);
-            }
-            while (gamepad2.dpad_down) {
-                robot.release.setDirection(DcMotor.Direction.FORWARD);
-                robot.release.setPower(0.45);
-            }
-            while (gamepad2.y){
-                robot.release.setPower(0);
-            }
+            tight = -gamepad2.right_stick_y;
+            robot.release.setPower(tight);
+
+
+            /* claw opens and closes
+             *  left toggle button = close, x = open
+             *  Uses servo clawServo
+             */
+            //COMPLETED AND WORKING
+            if (gamepad2.right_bumper)
+                clawOffset += CLAW_SPEED;
+            else if (gamepad2.left_bumper)
+                clawOffset -= CLAW_SPEED;
+
+            clawOffset = Range.clip(clawOffset, -0.5, 0.5);
+            robot.clawServo.setPosition(robot.MID_SERVO + clawOffset);
+
+
+
+            /* Makes the trigger open and close according to the x and y buttons on the second gamepad
+             * a = latch, b = release
+             * Uses servo triggerServo
+             */
+            //nO SERVO YET
+            if (gamepad2.a)
+                clawOffset2 += CLAW_SPEED;
+            else if (gamepad2.b)
+                clawOffset2 -= CLAW_SPEED;
+
+            clawOffset2 = Range.clip(clawOffset2, -0.5, 0.5);
+            robot.triggerServo.setPosition(robot.MID_SERVO + clawOffset2);
 
 
 
