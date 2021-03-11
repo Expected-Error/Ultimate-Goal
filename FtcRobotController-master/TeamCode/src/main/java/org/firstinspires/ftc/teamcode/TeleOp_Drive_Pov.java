@@ -34,7 +34,7 @@ import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.util.Range;
-import org.firstinspires.ftc.teamcode.HardwarePushbot;
+import org.firstinspires.ftc.teamcode.HardwareRobot;
 
 /**
  * This OpMode uses the common Pushbot hardware class to define the devices on the robot.
@@ -54,7 +54,7 @@ import org.firstinspires.ftc.teamcode.HardwarePushbot;
 public class TeleOp_Drive_Pov extends LinearOpMode {
 
     /* Declare OpMode members. */
-    HardwarePushbot robot           = new HardwarePushbot();   // Use a Pushbot's hardware
+    HardwareRobot robot           = new HardwareRobot();   // Use a Pushbot's hardware
     double          clawOffset      = 0;                       // Servo mid position
     double          clawOffset2      = 0;                       // Servo mid position
     final double    CLAW_SPEED      = 0.1 ;                   // sets rate to move servo
@@ -93,7 +93,7 @@ public class TeleOp_Drive_Pov extends LinearOpMode {
 
             //Left stick y axis moves it forward and back, x axis moves it left and right. If driving isn't preferred, change the second line to 'gamepad1.right_stick_x;'
             drive = -gamepad1.left_stick_y;
-            turn  =  gamepad1.left_stick_x;
+            turn  =  gamepad1.right_stick_x;
 
             // Combine drive and turn for blended motion.
             left  = drive + turn;
@@ -119,7 +119,7 @@ public class TeleOp_Drive_Pov extends LinearOpMode {
             */
             //COMPLETED AND WORKING
             arm = -gamepad2.left_stick_y;
-            robot.armMotor.setPower(arm/2);
+            robot.armMotor.setPower(arm);
 
 
 

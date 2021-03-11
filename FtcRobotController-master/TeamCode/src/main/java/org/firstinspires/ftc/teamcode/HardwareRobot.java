@@ -54,7 +54,7 @@ import static org.firstinspires.ftc.robotcontroller.external.samples.HardwarePus
  * Servo channel:  Servo to open left claw:  "left_hand"
  * Servo channel:  Servo to open right claw: "right_hand"
  */
-public class HardwarePushbot
+public class HardwareRobot
 {
     /* Public OpMode members. */
     public static DcMotor  frontLeft    = null;
@@ -73,7 +73,7 @@ public class HardwarePushbot
     private ElapsedTime period  = new ElapsedTime();
 
     /* Constructor */
-    public HardwarePushbot(){
+    public HardwareRobot(){
 
     }
 
@@ -125,5 +125,5 @@ public class HardwarePushbot
         clawServo.setPosition(MID_SERVO);
         triggerServo.setPosition(MID_SERVO);
     }
- }
+}
 
