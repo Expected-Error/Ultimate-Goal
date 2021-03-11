@@ -97,6 +97,20 @@ public class AutonomousOp extends LinearOpMode {
         robot.backRight.setPower(-0.5);
         sleep(700); //Code above from x time. Change the number in the parenthasis to # of seconds *1000
 
+        //Drive Forward (2)
+        robot.frontLeft.setPower(1);
+        robot.backLeft.setPower(1);
+        robot.frontRight.setPower(1);
+        robot.backRight.setPower(1);
+        sleep(500); //Code above from x time. Change the number in the parenthasis to # of seconds *1000
+
+        //Turn the robot left (3)
+        robot.frontLeft.setPower(-0.5);
+        robot.backLeft.setPower(-0.5);
+        robot.frontRight.setPower(0.5);
+        robot.backRight.setPower(0.5);
+        sleep(700); //Code above from x time. Change the number in the parenthasis to # of seconds *1000
+
         //Drive Forward (3)
         robot.frontLeft.setPower(1);
         robot.backLeft.setPower(1);
